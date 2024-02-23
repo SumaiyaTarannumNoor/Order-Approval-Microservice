@@ -9,7 +9,8 @@ class PrimaryOrderController extends Controller
 {
     public function index()
     {
-        $primaryOrders = PrimaryOrder::with(["committee", "primaryOrderProductDetails"])->get();
+        $primaryOrders = PrimaryOrder::all();
+        // $primaryOrders = PrimaryOrder::with(["committee", "primaryOrderProductDetails"])->get();
 
         return response()->json(["status"=>200, "success"=>true, "message"=> "All Pay Orders showing successfuly.", "data"=>$primaryOrders],200);
 
@@ -21,6 +22,7 @@ class PrimaryOrderController extends Controller
     public function show($id)
     {
         $primaryOrders = PrimaryOrder::findOrFail($id);
+        $primaryOrders = PrimaryOrder::with(["committee", "primaryOrderProductDetails"])->get();
 
         return response()->json(["status"=>200, "success"=>true, "message"=>"Primary Order showing successfully.", "data"=>$primaryOrders],200);
     }
